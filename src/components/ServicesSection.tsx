@@ -12,8 +12,8 @@ const iconMap: Record<string, React.ElementType> = {
 
 const ServicesSection = () => {
   return (
-    <section className="py-24 bg-noise relative">
-      <div className="relative z-10 container mx-auto px-6">
+    <section className="py-24 bg-section-alt relative">
+      <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -22,7 +22,7 @@ const ServicesSection = () => {
           className="text-center mb-16"
         >
           <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4">
-            Everything handled. <span className="text-gradient-gold italic">Nothing left to chance.</span>
+            Everything handled. <span className="text-gradient-accent italic">Nothing left to chance.</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
             All services are 100% free. Always.
@@ -39,7 +39,7 @@ const ServicesSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ delay: i * 0.06, duration: 0.4 }}
-                className="card-glow rounded-2xl border border-border bg-card/40 p-6"
+                className="card-hover rounded-2xl border border-border bg-background p-6"
               >
                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                   <Icon className="w-5 h-5 text-primary" />

@@ -9,8 +9,8 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section className="py-24 bg-noise relative">
-      <div className="relative z-10 container mx-auto px-6">
+    <section className="py-24 relative">
+      <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -19,13 +19,12 @@ const HowItWorks = () => {
           className="text-center mb-16"
         >
           <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground">
-            How it <span className="text-gradient-gold italic">works</span>
+            How it <span className="text-gradient-accent italic">works</span>
           </h2>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto relative">
-          {/* Connector line */}
-          <div className="hidden md:block absolute top-12 left-[20%] right-[20%] h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+          <div className="hidden md:block absolute top-12 left-[20%] right-[20%] h-px bg-gradient-to-r from-transparent via-border to-transparent" />
           
           {steps.map((step, i) => (
             <motion.div

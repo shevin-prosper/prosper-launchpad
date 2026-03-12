@@ -1,164 +1,114 @@
 "use client";
+import React from "react";
+import { CyberneticBentoGrid, BentoItem } from "@/components/ui/cybernetic-bento-grid";
+import { 
+  Users, 
+  ClipboardList, 
+  Presentation, 
+  FileCheck, 
+  Plane, 
+  GraduationCap, 
+  Wallet, 
+  Briefcase 
+} from "lucide-react";
 
-import * as React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
-import { BentoGridShowcase } from "@/components/ui/bento-product-features";
-import { FileText, GraduationCap, PenTool } from "lucide-react";
+interface ServiceProps {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  colorClass: string;
+}
 
-// --- Custom Cards tailored for Prosper Global Education ---
-
-const IntegrationCard = () => (
-  <Card className="flex h-full flex-col border-border/60 bg-white/50 backdrop-blur-sm">
-    <CardHeader>
-      <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 border border-blue-100 shadow-sm">
-        <FileText className="h-6 w-6" />
-      </div>
-      <CardTitle className="font-display text-xl">Application Hub</CardTitle>
-      <CardDescription className="font-body text-base mt-2 leading-relaxed">
-        Unlock effortless university applications. We handle the paperwork, 
-        connect with universities directly, and streamline your entire 
-        admission process. 100% free of charge.
-      </CardDescription>
-    </CardHeader>
-  </Card>
-);
-
-const TrackersCard = () => (
-  <Card className="h-full border-border/60 bg-white/50 backdrop-blur-sm">
-    <CardContent className="flex h-full flex-col justify-between p-6">
-      <div>
-        <CardTitle className="text-base font-semibold font-display">
-          Students Placed
-        </CardTitle>
-        <CardDescription className="font-body text-xs mt-0.5">2,400+ Active Students</CardDescription>
-      </div>
-      <div className="flex -space-x-2 overflow-hidden mt-6">
-        <img
-          className="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover"
-          src="/photo-grad.jpg"
-          alt="Student 1"
-        />
-        <img
-          className="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover"
-          src="/photo-event1.jpg"
-          alt="Student 2"
-        />
-        <div className="flex h-10 w-10 items-center justify-center rounded-full ring-2 ring-white bg-blue-100 text-blue-800 text-xs font-bold font-body">
-          +2k
-        </div>
-      </div>
-    </CardContent>
-  </Card>
-);
-
-const FocusCard = () => (
-  <Card className="h-full border-border/60 bg-white/50 backdrop-blur-sm">
-    <CardContent className="flex h-full flex-col justify-between p-6">
-      <div className="flex items-start justify-between">
-        <div>
-          <CardTitle className="text-base font-semibold font-display">Success</CardTitle>
-          <CardDescription className="font-body text-xs mt-0.5">Visa Approvals</CardDescription>
-        </div>
-        <Badge variant="outline" className="border-emerald-300 text-emerald-700 bg-emerald-50">
-          High Rate
-        </Badge>
-      </div>
-      <div className="mt-4">
-        <span className="text-5xl font-black font-display text-slate-800 tracking-tighter">98%</span>
-      </div>
-      <div className="flex justify-between text-[11px] text-muted-foreground font-body mt-2 uppercase tracking-wide font-semibold">
-        <span>Historical</span>
-        <span className="text-emerald-600">Verified</span>
-      </div>
-    </CardContent>
-  </Card>
-);
-
-const StatisticCard = () => (
-  <Card className="relative h-full w-full overflow-hidden border-border/60 bg-gradient-to-br from-blue-600 to-indigo-800">
-    <div
-      className="absolute inset-0 opacity-10"
-      style={{
-        backgroundImage: "radial-gradient(#ffffff 2px, transparent 2px)",
-        backgroundSize: "24px 24px",
-      }}
-    />
-    <CardContent className="relative z-10 flex h-full flex-col items-center justify-center p-6 text-white text-center">
-      <span className="text-5xl md:text-6xl font-black font-display tracking-tighter drop-shadow-lg">100%</span>
-      <span className="font-body font-bold text-blue-100 mt-2 tracking-widest uppercase text-sm">Free Service</span>
-    </CardContent>
-  </Card>
-);
-
-const ProductivityCard = () => (
-  <Card className="h-full border-border/60 bg-white/50 backdrop-blur-sm relative overflow-hidden group">
-    <div className="absolute -right-6 -top-6 text-yellow-100 opacity-40 group-hover:scale-110 group-hover:opacity-60 transition-all duration-500">
-      <GraduationCap size={140} strokeWidth={1} />
-    </div>
-    <CardContent className="flex h-full flex-col justify-end p-6 relative z-10">
-      <CardTitle className="text-base font-semibold font-display">
-        Scholarships
-      </CardTitle>
-      <CardDescription className="font-body text-sm mt-1 leading-relaxed">
-        Boost your education funding with our expert guidance on financial aid and university grants.
-      </CardDescription>
-    </CardContent>
-  </Card>
-);
-
-const ShortcutsCard = () => (
-  <Card className="h-full border-border/60 bg-white/50 backdrop-blur-sm relative overflow-hidden group">
-    <div className="absolute right-0 top-0 -mr-6 -mt-6 text-blue-100 opacity-60 group-hover:scale-110 group-hover:opacity-80 transition-all duration-500">
-      <PenTool size={140} strokeWidth={1} />
-    </div>
-    <CardContent className="flex h-full flex-col justify-center p-6 md:p-8 relative z-10 w-full md:w-3/4">
-      <CardTitle className="text-xl font-bold font-display text-slate-800">SOP Writing</CardTitle>
-      <CardDescription className="font-body text-base mt-2 leading-relaxed">
-        Stand out from the crowd. Our experts help craft compelling Statements of Purpose that get you noticed by top university admission boards.
-      </CardDescription>
-    </CardContent>
-  </Card>
-);
+const services: ServiceProps[] = [
+  {
+    title: "Counseling & Guidance",
+    description: "Comprehensive advice on all study possibilities, universities, and academic programs to help you make informed decisions.",
+    icon: <Users className="h-6 w-6" />,
+    colorClass: "bg-blue-600 shadow-blue-200",
+  },
+  {
+    title: "Application Support",
+    description: "From preparing and submitting your application to securing offer letters, we assist you every step of the way.",
+    icon: <ClipboardList className="h-6 w-6" />,
+    colorClass: "bg-pink-500 shadow-pink-200",
+  },
+  {
+    title: "Interview Preparation",
+    description: "Get ready for credibility interviews, CAS, and visa interviews with our expert preparation and mock sessions.",
+    icon: <Presentation className="h-6 w-6" />,
+    colorClass: "bg-cyan-500 shadow-cyan-200",
+  },
+  {
+    title: "Documentation Assistance",
+    description: "We offer support with key documentation, including crafting a strong Statement of Purpose (SOP) that highlights your strengths.",
+    icon: <FileCheck className="h-6 w-6" />,
+    colorClass: "bg-purple-600 shadow-purple-200",
+  },
+  {
+    title: "Visa Application",
+    description: "Our team will guide you through the entire visa application process, ensuring all requirements are met for a successful outcome.",
+    icon: <Plane className="h-6 w-6" />,
+    colorClass: "bg-orange-600 shadow-orange-200",
+  },
+  {
+    title: "Scholarship Opportunities",
+    description: "We help identify scholarship options that align with your academic and financial needs, providing guidance to maximize your chances.",
+    icon: <GraduationCap className="h-6 w-6" />,
+    colorClass: "bg-emerald-500 shadow-emerald-200",
+  },
+  {
+    title: "Financial Planning",
+    description: "Receive expert advice on financial planning, including a clear pathway for covering your total study and living expenses abroad.",
+    icon: <Wallet className="h-6 w-6" />,
+    colorClass: "bg-teal-600 shadow-teal-200",
+  },
+  {
+    title: "5-Year Career Guarantee",
+    description: "Benefit from our five-year career guidance warranty, offering continuous support as you navigate your post-graduation journey.",
+    icon: <Briefcase className="h-6 w-6" />,
+    colorClass: "bg-indigo-600 shadow-indigo-200",
+  },
+];
 
 const ServicesSection = () => {
   return (
-    <section id="services" className="bg-slate-50 py-24 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 -mr-40 w-96 h-96 bg-blue-100/40 rounded-full blur-3xl opacity-60 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 -ml-40 w-96 h-96 bg-purple-100/40 rounded-full blur-3xl opacity-60 pointer-events-none" />
+    <section id="services" className="bg-[#fcfdff] py-24 relative overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute top-0 right-0 -mr-40 w-96 h-96 bg-blue-50/50 rounded-full blur-3xl opacity-60 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 -ml-40 w-96 h-96 bg-pink-50/50 rounded-full blur-3xl opacity-60 pointer-events-none" />
       
-      <div className="max-w-6xl mx-auto px-6 lg:px-8 relative z-10">
-        <div className="mb-14 text-center max-w-2xl mx-auto">
-          <div className="inline-flex border border-blue-200 bg-blue-50 text-blue-700 text-xs font-bold px-4 py-1.5 rounded-full mb-5 tracking-wide uppercase font-body">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <div className="mb-16 text-center max-w-3xl mx-auto">
+          <div className="inline-flex border border-blue-100 bg-blue-50/50 text-blue-700 text-xs font-bold px-5 py-2 rounded-full mb-6 tracking-widest uppercase font-body">
             Our Expertise
           </div>
-          <h2 className="font-display text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-5 leading-tight">
-            How we can help you <span className="text-blue-600">succeed.</span>
+          <h2 className="font-display text-4xl md:text-5xl font-extrabold text-[#0D1B3E] tracking-tight mb-6 leading-tight">
+            Comprehensive Support for your <span className="text-blue-600 italic">Global Journey.</span>
           </h2>
-          <p className="font-body text-lg text-slate-500 leading-relaxed">
-            From picking the perfect university to landing safely at your destination, 
-            we manage the entire complex process for you securely.
+          <p className="font-body text-base text-slate-500 max-w-2xl mx-auto">
+            Discover your best program in minutes with our expert assistance across 
+            every critical touchpoint of your international education.
           </p>
         </div>
 
-        <BentoGridShowcase
-          integration={<IntegrationCard />}
-          trackers={<TrackersCard />}
-          statistic={<StatisticCard />}
-          focus={<FocusCard />}
-          productivity={<ProductivityCard />}
-          shortcuts={<ShortcutsCard />}
-        />
+        <CyberneticBentoGrid className="lg:grid-cols-4">
+          {services.map((service, index) => (
+            <BentoItem 
+                key={index} 
+                className="flex flex-col items-center text-center group"
+            >
+              <div className={`mb-8 flex h-16 w-16 items-center justify-center rounded-2xl ${service.colorClass} text-white shadow-xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}>
+                {service.icon}
+              </div>
+              <h3 className="text-xl font-extrabold text-[#0D1B3E] font-display mb-4 leading-snug">
+                {service.title}
+              </h3>
+              <p className="font-body text-[13px] text-slate-500 leading-relaxed">
+                {service.description}
+              </p>
+            </BentoItem>
+          ))}
+        </CyberneticBentoGrid>
       </div>
     </section>
   );

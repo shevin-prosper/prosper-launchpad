@@ -221,20 +221,6 @@ export default function ScrollMorphSection() {
                 className="absolute inset-0"
                 style={{ background: "linear-gradient(to bottom, transparent 45%, rgba(0,0,0,0.45) 100%)" }}
               />
-              <div className="absolute bottom-6 left-4 right-4 bg-white/95 backdrop-blur-sm rounded-xl p-3 shadow-lg">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <p className="text-[10px] text-gray-400" style={{ fontFamily: "'Outfit', sans-serif" }}>Universities</p>
-                    <p className="text-sm font-bold text-gray-900">500+ Partners</p>
-                  </div>
-                  <span
-                    className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
-                    style={{ background: "#dbeafe", color: "#1d4ed8" }}
-                  >
-                    UK · AU · CA
-                  </span>
-                </div>
-              </div>
             </div>
 
             {/* ── CENTER PLACEHOLDER (morph image lands here — keep invisible) ── */}
@@ -255,20 +241,6 @@ export default function ScrollMorphSection() {
                 className="absolute inset-0"
                 style={{ background: "linear-gradient(to bottom, transparent 45%, rgba(0,0,0,0.45) 100%)" }}
               />
-              <div className="absolute bottom-6 left-4 right-4 bg-white/95 backdrop-blur-sm rounded-xl p-3 shadow-lg">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <p className="text-[10px] text-gray-400" style={{ fontFamily: "'Outfit', sans-serif" }}>Students Placed</p>
-                    <p className="text-sm font-bold text-gray-900">2,400+</p>
-                  </div>
-                  <span
-                    className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
-                    style={{ background: "#dcfce7", color: "#15803d" }}
-                  >
-                    Free Service
-                  </span>
-                </div>
-              </div>
             </div>
 
           </div>

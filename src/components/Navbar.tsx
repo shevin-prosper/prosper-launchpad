@@ -1,173 +1,154 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import React, { useState } from "react";
+import { HoveredLink, Menu, MenuItem, ProductItem } from "@/components/ui/navbar-menu";
+import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { Headphones, MessageSquare, HelpCircle, Sparkles, GraduationCap, FileText } from "lucide-react";
 
-const NAV_LINKS = [
-  { label: "Services", href: "#services" },
-  { label: "Destinations", href: "#destinations" },
-  { label: "How It Works", href: "#how-it-works" },
-];
+export function Navbar() {
+  const [active, setActive] = useState<string | null>(null);
+  const { scrollY } = useScroll();
 
-const SECTION_IDS = ["services", "destinations", "how-it-works"];
-
-const Navbar = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>("");
-  const shouldReduceMotion = useReducedMotion();
-
-  // IntersectionObserver — highlight the nav link whose section is in view
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-
-    SECTION_IDS.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id);
-        },
-        { threshold: 0.35 }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-
-    return () => observers.forEach((o) => o.disconnect());
-  }, []);
-
-  // Close mobile drawer on resize past md breakpoint
-  useEffect(() => {
-    const onResize = () => {
-      if (window.innerWidth >= 768) setMobileOpen(false);
-    };
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
+  // Morph values: logo goes from big (no pill) → small (pill)
+  const logoHeight = useTransform(scrollY, [0, 120], [72, 40]);
+  const pillOpacity = useTransform(scrollY, [0, 100], [0, 1]);
+  const pillScale = useTransform(scrollY, [0, 100], [0.9, 1]);
 
   return (
-    <>
-      <motion.nav
-        initial={shouldReduceMotion ? false : { y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="fixed top-0 left-0 right-0 z-50"
-        style={{ backgroundColor: "#ffffff" }}
-      >
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-8 py-4">
-          {/* Left: Logo */}
-          <a href="#">
-            <img
-              src="/logo.png"
-              alt="Prosper Global Education"
-              className="h-14 w-auto"
-              style={{ mixBlendMode: "multiply" }}
+    <div className="fixed top-6 inset-x-0 w-full z-50 flex justify-center px-4">
+      <div className={cn("relative w-full max-w-7xl flex items-center justify-between")}>
+
+        {/* Morphing Logo: starts big, shrinks into pill */}
+        <div className="flex-1 flex justify-start">
+          <Link to="/" className="relative flex items-center">
+            {/* Pill background — fades in on scroll */}
+            <motion.div
+              style={{ opacity: pillOpacity, scale: pillScale }}
+              className="absolute inset-0 bg-white border border-slate-200 shadow-sm rounded-full"
             />
-          </a>
-
-          {/* Center: Nav links — desktop only */}
-          <div className="hidden md:flex items-center gap-10">
-            {NAV_LINKS.map((link) => {
-              const isActive = activeSection === link.href.replace("#", "");
-              return (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-sm font-medium transition-colors duration-200 relative"
-                  style={{
-                    fontFamily: "'Outfit', sans-serif",
-                    color: isActive ? "#0d0d12" : "#4a5568",
-                  }}
-                >
-                  {link.label}
-                  {isActive && (
-                    <span
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full"
-                      style={{ backgroundColor: "#0d0d12" }}
-                    />
-                  )}
-                </a>
-              );
-            })}
-          </div>
-
-          {/* Right: CTA + hamburger */}
-          <div className="flex items-center gap-3">
-            <a
-              href="#book"
-              className="hidden md:inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-200 hover:opacity-90"
-              style={{
-                backgroundColor: "#0d0d12",
-                color: "#ffffff",
-                fontFamily: "'Outfit', sans-serif",
-              }}
-            >
-              Book Free Consultation
-            </a>
-
-            {/* Hamburger — mobile only */}
-            <button
-              onClick={() => setMobileOpen((v) => !v)}
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileOpen}
-              className="md:hidden flex items-center justify-center w-10 h-10 rounded-full transition-colors duration-200"
-              style={{ backgroundColor: mobileOpen ? "#e2e8f0" : "transparent" }}
-            >
-              {mobileOpen ? (
-                <X className="w-5 h-5" style={{ color: "#0d0d12" }} />
-              ) : (
-                <Menu className="w-5 h-5" style={{ color: "#0d0d12" }} />
-              )}
-            </button>
-          </div>
+            {/* Logo — shrinks from 72px → 40px on scroll */}
+            <motion.img
+              src="/logo.png"
+              alt="Prosper Logo"
+              style={{ height: logoHeight }}
+              className="relative z-10 w-auto object-contain px-4 py-2"
+            />
+          </Link>
         </div>
-      </motion.nav>
 
-      {/* Mobile nav drawer */}
-      {mobileOpen && (
-        <motion.div
-          initial={shouldReduceMotion ? {} : { opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.2 }}
-          className="fixed top-[72px] left-0 right-0 z-40 shadow-xl"
-          style={{ backgroundColor: "#ffffff", borderBottom: "1px solid #dde3ec" }}
-        >
-          <nav className="max-w-7xl mx-auto px-8 py-6 flex flex-col gap-1">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="py-3 px-4 rounded-xl text-sm font-medium transition-colors duration-200"
-                style={{
-                  fontFamily: "'Outfit', sans-serif",
-                  color: "#0d0d12",
-                  backgroundColor:
-                    activeSection === link.href.replace("#", "")
-                      ? "#e2e8f0"
-                      : "transparent",
-                }}
-              >
-                {link.label}
-              </a>
-            ))}
-            <a
-              href="#book"
-              onClick={() => setMobileOpen(false)}
-              className="mt-3 inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 hover:opacity-90"
-              style={{
-                backgroundColor: "#0d0d12",
-                color: "#ffffff",
-                fontFamily: "'Outfit', sans-serif",
-              }}
-            >
-              Book Free Consultation
-            </a>
-          </nav>
-        </motion.div>
-      )}
-    </>
+        {/* Floating Menu in the center */}
+        <div className="flex-shrink-0">
+          <Menu setActive={setActive}>
+            <MenuItem setActive={setActive} active={active} item="Services">
+              <div className="flex flex-col space-y-4 text-sm w-48 p-2">
+                <HoveredLink to="#services">
+                  <div className="flex items-center gap-3 group/link">
+                    <div className="p-2 bg-blue-50 rounded-lg text-blue-600 group-hover/link:bg-blue-600 group-hover/link:text-white transition-colors">
+                      <FileText size={16} />
+                    </div>
+                    <span>Application Hub</span>
+                  </div>
+                </HoveredLink>
+                <HoveredLink to="#services">
+                  <div className="flex items-center gap-3 group/link">
+                    <div className="p-2 bg-indigo-50 rounded-lg text-indigo-600 group-hover/link:bg-indigo-600 group-hover/link:text-white transition-colors">
+                      <Sparkles size={16} />
+                    </div>
+                    <span>SOP Writing</span>
+                  </div>
+                </HoveredLink>
+                <HoveredLink to="#services">
+                  <div className="flex items-center gap-3 group/link">
+                    <div className="p-2 bg-amber-50 rounded-lg text-amber-600 group-hover/link:bg-amber-600 group-hover/link:text-white transition-colors">
+                      <GraduationCap size={16} />
+                    </div>
+                    <span>Scholarships</span>
+                  </div>
+                </HoveredLink>
+              </div>
+            </MenuItem>
+
+            <MenuItem setActive={setActive} active={active} item="Explore">
+              <div className="text-sm grid grid-cols-2 gap-8 p-4 w-[500px]">
+                <ProductItem
+                  title="Destinations"
+                  href="#destinations"
+                  src="https://images.unsplash.com/photo-1526772662000-3f88f10c053b?q=80&w=400&auto=format&fit=crop"
+                  description="Explore 15+ countries and 500+ top-tier universities."
+                />
+                <ProductItem
+                  title="How it Works"
+                  href="#how-it-works"
+                  src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=400&auto=format&fit=crop"
+                  description="Step-by-step guide to your global education journey."
+                />
+                <ProductItem
+                  title="Partner Universities"
+                  href="#destinations"
+                  src="https://images.unsplash.com/photo-1541339907198-e08756ebafe3?q=80&w=400&auto=format&fit=crop"
+                  description="Access exclusive intake windows and direct admissions."
+                />
+                <ProductItem
+                  title="Success Stories"
+                  href="#testimonials"
+                  src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=400&auto=format&fit=crop"
+                  description="See how 2,400+ students started their journey."
+                />
+              </div>
+            </MenuItem>
+
+            <MenuItem setActive={setActive} active={active} item="Not sure?">
+              <div className="flex flex-col space-y-4 text-sm w-52 p-2">
+                <HoveredLink to="#book">
+                  <div className="flex items-center gap-3 group/link">
+                    <div className="p-2 bg-emerald-50 rounded-lg text-emerald-600 group-hover/link:bg-emerald-600 group-hover/link:text-white transition-colors">
+                      <HelpCircle size={16} />
+                    </div>
+                    <div>
+                      <p className="font-bold text-slate-800 group-hover/link:text-blue-600 transition-colors">Quick Advice</p>
+                      <p className="text-[10px] text-slate-500">Unsure where to start?</p>
+                    </div>
+                  </div>
+                </HoveredLink>
+                <HoveredLink to="#book">
+                  <div className="flex items-center gap-3 group/link">
+                    <div className="p-2 bg-pink-50 rounded-lg text-pink-600 group-hover/link:bg-pink-600 group-hover/link:text-white transition-colors">
+                      <MessageSquare size={16} />
+                    </div>
+                    <div>
+                      <p className="font-bold text-slate-800 group-hover/link:text-blue-600 transition-colors">Chat with Us</p>
+                      <p className="text-[10px] text-slate-500">Speak to an expert now.</p>
+                    </div>
+                  </div>
+                </HoveredLink>
+                <HoveredLink to="#book">
+                  <div className="flex items-center gap-3 group/link">
+                    <div className="p-2 bg-purple-50 rounded-lg text-purple-600 group-hover/link:bg-purple-600 group-hover/link:text-white transition-colors">
+                      <Headphones size={16} />
+                    </div>
+                    <div>
+                      <p className="font-bold text-slate-800 group-hover/link:text-blue-600 transition-colors">Support Hub</p>
+                      <p className="text-[10px] text-slate-500">Visa & pre-departure info.</p>
+                    </div>
+                  </div>
+                </HoveredLink>
+              </div>
+            </MenuItem>
+          </Menu>
+        </div>
+
+        {/* CTA Button on the right */}
+        <div className="flex-1 flex justify-end">
+          <a
+            href="#book"
+            className="hidden md:inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-blue-200 hover:bg-blue-700 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 font-body"
+          >
+            Book Now
+          </a>
+        </div>
+      </div>
+    </div>
   );
-};
+}
 
 export default Navbar;

@@ -286,6 +286,7 @@ const GlobeHero = () => {
               </div>
             ))}
           </motion.div>
+
         </motion.div>
 
         {/* ══ RIGHT — Globe ════════════════════════════════════════════════════ */}

@@ -110,13 +110,15 @@ const WhyProsper = () => (
             </p>
           </div>
           <div
-            className="px-6 py-5 flex flex-col items-center gap-1"
-            style={{ background: "#0D1B3E" }}
+            className="px-6 py-5 flex flex-col items-center gap-2"
+            style={{ background: "#1A3C8F" }}
           >
-            <img src="/logo.png" alt="Prosper" className="h-7 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
+            <div className="bg-white rounded-xl px-4 py-2 shadow-sm">
+              <img src="/logo.png" alt="Prosper" className="h-7 w-auto object-contain" />
+            </div>
             <span
-              className="text-xs font-semibold mt-1"
-              style={{ color: "rgba(255,255,255,0.5)", fontFamily: "'Outfit', sans-serif" }}
+              className="text-xs font-semibold"
+              style={{ color: "rgba(255,255,255,0.6)", fontFamily: "'Outfit', sans-serif" }}
             >
               Prosper Global
             </span>
@@ -156,7 +158,7 @@ const WhyProsper = () => (
             {/* Prosper value */}
             <div
               className="px-6 py-4 flex items-center justify-center border-l-2"
-              style={{ borderColor: "#1A3C8F", background: "rgba(26,60,143,0.02)" }}
+              style={{ borderColor: "#1A3C8F", background: "rgba(26,60,143,0.03)" }}
             >
               <Cell value={row.prosper} isProsper={true} />
             </div>

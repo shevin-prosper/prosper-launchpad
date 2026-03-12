@@ -1,12 +1,12 @@
 export const students = [
   {
-    name: "Naduni Perera",
-    degree: "MSc Data Science",
+    name: "Naduni",
+    degree: "MSc Global Supply Chain Management",
     university: "University of Manchester",
     country: "UK",
     flag: "🇬🇧",
-    quote: "Prosper made the impossible feel easy. I got my offer in 3 weeks and my visa on the first attempt.",
-    avatar: "NP",
+    quote: "Highly recommended for anyone looking for overseas education. The best consultancy service I've come across.",
+    avatar: "N",
   },
   {
     name: "Kavith Fernando",

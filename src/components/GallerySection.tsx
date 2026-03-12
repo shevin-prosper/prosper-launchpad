@@ -61,7 +61,7 @@ const PhotoCard = ({
       className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
     />
     {/* Gradient overlay */}
-    <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B3E]/70 via-[#0D1B3E]/10 to-transparent" />
+    <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B3E]/45 via-[#0D1B3E]/10 to-transparent" />
 
     {/* Label pill */}
     <div className="absolute top-4 left-4">

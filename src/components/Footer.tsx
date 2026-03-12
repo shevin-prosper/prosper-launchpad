@@ -1,3 +1,5 @@
+import { Linkedin, Facebook, Instagram } from "lucide-react";
+
 const footerLinks = {
   Services: [
     "Counseling & Guidance",
@@ -35,13 +37,18 @@ const Footer = () => {
               Sri Lanka's most trusted study abroad partner. Free, always.
             </p>
             <div className="flex items-center gap-3 mt-5">
-              {["in", "fb", "ig"].map((s) => (
+              {[
+                { icon: <Linkedin size={14} />, label: "LinkedIn" },
+                { icon: <Facebook size={14} />, label: "Facebook" },
+                { icon: <Instagram size={14} />, label: "Instagram" },
+              ].map((s) => (
                 <a
-                  key={s}
+                  key={s.label}
                   href="#"
-                  className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-xs font-semibold text-white/50 hover:border-[#2952CC] hover:text-white transition-all duration-200"
+                  aria-label={s.label}
+                  className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:border-[#2952CC] hover:text-white transition-all duration-200"
                 >
-                  {s}
+                  {s.icon}
                 </a>
               ))}
             </div>

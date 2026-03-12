@@ -32,17 +32,6 @@ const GlobeHero = () => {
   const globeRef  = useRef<any>(null);
 
   useEffect(() => {
-    // ── Load Plus Jakarta Sans ──────────────────────────────────────────────
-    const fontId = "plus-jakarta-font";
-    if (!document.getElementById(fontId)) {
-      const link    = document.createElement("link");
-      link.id       = fontId;
-      link.rel      = "stylesheet";
-      link.href     =
-        "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap";
-      document.head.appendChild(link);
-    }
-
     // ── Initialise globe once globe.gl is available ─────────────────────────
     const setup = () => {
       const GlobeFn = (window as any).Globe;
@@ -136,7 +125,7 @@ const GlobeHero = () => {
         minHeight: "100vh",
         paddingTop: "64px",
         background: "linear-gradient(180deg, #ffffff 55%, #f0f4ff 100%)",
-        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        fontFamily: "'Outfit', sans-serif",
       }}
     >
       <div
@@ -180,10 +169,10 @@ const GlobeHero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "'Syne', sans-serif",
               fontWeight: 900,
               fontSize: "clamp(2.6rem, 5.2vw, 4.25rem)",
-              lineHeight: 1.04,
+              lineHeight: 1.12,
               letterSpacing: "-0.035em",
               color: "#0a0a2e",
               margin: 0,
@@ -198,7 +187,7 @@ const GlobeHero = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.35, duration: 0.55 }}
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "'Outfit', sans-serif",
               fontWeight: 400,
               fontSize: "clamp(1rem, 1.4vw, 1.1rem)",
               lineHeight: 1.7,
@@ -227,7 +216,7 @@ const GlobeHero = () => {
                 padding: "14px 28px",
                 fontSize: 15,
                 fontWeight: 700,
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "'Outfit', sans-serif",
                 boxShadow: "0 4px 22px rgba(10,10,46,0.22)",
                 textDecoration: "none",
                 letterSpacing: "-0.01em",
@@ -242,7 +231,7 @@ const GlobeHero = () => {
                 color: "#1A3C8F",
                 fontSize: 15,
                 fontWeight: 600,
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "'Outfit', sans-serif",
                 textDecoration: "none",
               }}
               className="hover:opacity-70 transition-opacity duration-200"
@@ -263,7 +252,7 @@ const GlobeHero = () => {
               <div key={s.label}>
                 <div
                   style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontFamily: "'Syne', sans-serif",
                     fontWeight: 800,
                     fontSize: "1.35rem",
                     color: "#0a0a2e",
@@ -275,7 +264,7 @@ const GlobeHero = () => {
                 </div>
                 <div
                   style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontFamily: "'Outfit', sans-serif",
                     fontSize: "0.76rem",
                     color: "#9ca3af",
                     marginTop: 3,

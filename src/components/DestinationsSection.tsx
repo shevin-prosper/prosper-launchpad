@@ -159,13 +159,13 @@ const DestinationsSection = () => {
                       style={{ originY: 1 }} // scale up from the bottom point
                     >
                       {/* The pole */}
-                      <line x1="0" y1="0" x2="0" y2="-22" stroke={dest.color} strokeWidth="1.5" strokeLinecap="round" />
+                      <line x1="0" y1="0" x2="0" y2="-38" stroke={dest.color} strokeWidth="2.5" strokeLinecap="round" />
                       {/* The Flag Bubble */}
-                      <g transform="translate(0, -28)">
+                      <g transform="translate(0, -48)">
                         {/* White circular background for flag */}
-                        <circle r="9" fill="#ffffff" stroke={dest.color} strokeWidth="1.2" />
+                        <circle r="14" fill="#ffffff" stroke={dest.color} strokeWidth="2" />
                         {/* Centered Emoji Flag */}
-                        <text x="-0.5" y="3" fontSize="10" textAnchor="middle" dominantBaseline="central">
+                        <text x="-0.5" y="4.5" fontSize="16" textAnchor="middle" dominantBaseline="central">
                           {dest.flag}
                         </text>
                       </g>

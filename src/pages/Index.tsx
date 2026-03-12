@@ -4,8 +4,6 @@ import LogoStrip from "@/components/LogoStrip";
 import ScrollMorphSection from "@/components/ScrollMorphSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import HowItWorks from "@/components/HowItWorks";
-import ServicesSection from "@/components/ServicesSection";
-import ImpactNumbers from "@/components/ImpactNumbers";
 import DestinationsSection from "@/components/DestinationsSection";
 import WhyProsper from "@/components/WhyProsper";
 import TeamSection from "@/components/TeamSection";
@@ -25,8 +23,6 @@ const Index = () => {
       <ScrollMorphSection />
       <TestimonialsSection />
       <HowItWorks />
-      <ServicesSection />
-      <ImpactNumbers />
       <DestinationsSection />
       <WhyProsper />
       <TeamSection />

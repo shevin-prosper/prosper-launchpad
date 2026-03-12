@@ -124,7 +124,7 @@ const GlobeHero = () => {
       style={{
         minHeight: "100vh",
         paddingTop: "64px",
-        background: "linear-gradient(180deg, #ffffff 55%, #f0f4ff 100%)",
+        background: "#ffffff",
         fontFamily: "'Outfit', sans-serif",
       }}
     >

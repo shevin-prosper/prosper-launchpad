@@ -146,6 +146,31 @@ const DestinationsSection = () => {
                       style={{ transition: "fill 0.2s" }}
                     />
                   </g>
+                  
+                  {/* Animated Flagpole - springs up when active */}
+                  <g style={{ transform: "translate(0, -5px)" }}> 
+                    <motion.g
+                      initial={{ scaleY: 0, opacity: 0 }}
+                      animate={{ 
+                        scaleY: activeDestination?.name === dest.name ? 1 : 0, 
+                        opacity: activeDestination?.name === dest.name ? 1 : 0 
+                      }}
+                      transition={{ type: "spring", stiffness: 220, damping: 15 }}
+                      style={{ originY: 1 }} // scale up from the bottom point
+                    >
+                      {/* The pole */}
+                      <line x1="0" y1="0" x2="0" y2="-22" stroke={dest.color} strokeWidth="1.5" strokeLinecap="round" />
+                      {/* The Flag Bubble */}
+                      <g transform="translate(0, -28)">
+                        {/* White circular background for flag */}
+                        <circle r="9" fill="#ffffff" stroke={dest.color} strokeWidth="1.2" />
+                        {/* Centered Emoji Flag */}
+                        <text x="-0.5" y="3" fontSize="10" textAnchor="middle" dominantBaseline="central">
+                          {dest.flag}
+                        </text>
+                      </g>
+                    </motion.g>
+                  </g>
                 </Marker>
               ))}
             </ZoomableGroup>

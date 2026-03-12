@@ -1,88 +1,164 @@
-import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import {
-  MessageCircle, FileText, Shield, Search,
-  PenTool, Calculator, Users, Award,
-} from "lucide-react";
-import { services } from "@/data/content";
+"use client";
 
-const iconMap: Record<string, React.ElementType> = {
-  MessageCircle, FileText, Shield, Search,
-  PenTool, Calculator, Users, Award,
-};
+import * as React from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { BentoGridShowcase } from "@/components/ui/bento-product-features";
+import { FileText, GraduationCap, PenTool } from "lucide-react";
+
+// --- Custom Cards tailored for Prosper Global Education ---
+
+const IntegrationCard = () => (
+  <Card className="flex h-full flex-col border-border/60 bg-white/50 backdrop-blur-sm">
+    <CardHeader>
+      <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 border border-blue-100 shadow-sm">
+        <FileText className="h-6 w-6" />
+      </div>
+      <CardTitle className="font-display text-xl">Application Hub</CardTitle>
+      <CardDescription className="font-body text-base mt-2 leading-relaxed">
+        Unlock effortless university applications. We handle the paperwork, 
+        connect with universities directly, and streamline your entire 
+        admission process. 100% free of charge.
+      </CardDescription>
+    </CardHeader>
+  </Card>
+);
+
+const TrackersCard = () => (
+  <Card className="h-full border-border/60 bg-white/50 backdrop-blur-sm">
+    <CardContent className="flex h-full flex-col justify-between p-6">
+      <div>
+        <CardTitle className="text-base font-semibold font-display">
+          Students Placed
+        </CardTitle>
+        <CardDescription className="font-body text-xs mt-0.5">2,400+ Active Students</CardDescription>
+      </div>
+      <div className="flex -space-x-2 overflow-hidden mt-6">
+        <img
+          className="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover"
+          src="/photo-grad.jpg"
+          alt="Student 1"
+        />
+        <img
+          className="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover"
+          src="/photo-event1.jpg"
+          alt="Student 2"
+        />
+        <div className="flex h-10 w-10 items-center justify-center rounded-full ring-2 ring-white bg-blue-100 text-blue-800 text-xs font-bold font-body">
+          +2k
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+);
+
+const FocusCard = () => (
+  <Card className="h-full border-border/60 bg-white/50 backdrop-blur-sm">
+    <CardContent className="flex h-full flex-col justify-between p-6">
+      <div className="flex items-start justify-between">
+        <div>
+          <CardTitle className="text-base font-semibold font-display">Success</CardTitle>
+          <CardDescription className="font-body text-xs mt-0.5">Visa Approvals</CardDescription>
+        </div>
+        <Badge variant="outline" className="border-emerald-300 text-emerald-700 bg-emerald-50">
+          High Rate
+        </Badge>
+      </div>
+      <div className="mt-4">
+        <span className="text-5xl font-black font-display text-slate-800 tracking-tighter">98%</span>
+      </div>
+      <div className="flex justify-between text-[11px] text-muted-foreground font-body mt-2 uppercase tracking-wide font-semibold">
+        <span>Historical</span>
+        <span className="text-emerald-600">Verified</span>
+      </div>
+    </CardContent>
+  </Card>
+);
+
+const StatisticCard = () => (
+  <Card className="relative h-full w-full overflow-hidden border-border/60 bg-gradient-to-br from-blue-600 to-indigo-800">
+    <div
+      className="absolute inset-0 opacity-10"
+      style={{
+        backgroundImage: "radial-gradient(#ffffff 2px, transparent 2px)",
+        backgroundSize: "24px 24px",
+      }}
+    />
+    <CardContent className="relative z-10 flex h-full flex-col items-center justify-center p-6 text-white text-center">
+      <span className="text-5xl md:text-6xl font-black font-display tracking-tighter drop-shadow-lg">100%</span>
+      <span className="font-body font-bold text-blue-100 mt-2 tracking-widest uppercase text-sm">Free Service</span>
+    </CardContent>
+  </Card>
+);
+
+const ProductivityCard = () => (
+  <Card className="h-full border-border/60 bg-white/50 backdrop-blur-sm relative overflow-hidden group">
+    <div className="absolute -right-6 -top-6 text-yellow-100 opacity-40 group-hover:scale-110 group-hover:opacity-60 transition-all duration-500">
+      <GraduationCap size={140} strokeWidth={1} />
+    </div>
+    <CardContent className="flex h-full flex-col justify-end p-6 relative z-10">
+      <CardTitle className="text-base font-semibold font-display">
+        Scholarships
+      </CardTitle>
+      <CardDescription className="font-body text-sm mt-1 leading-relaxed">
+        Boost your education funding with our expert guidance on financial aid and university grants.
+      </CardDescription>
+    </CardContent>
+  </Card>
+);
+
+const ShortcutsCard = () => (
+  <Card className="h-full border-border/60 bg-white/50 backdrop-blur-sm relative overflow-hidden group">
+    <div className="absolute right-0 top-0 -mr-6 -mt-6 text-blue-100 opacity-60 group-hover:scale-110 group-hover:opacity-80 transition-all duration-500">
+      <PenTool size={140} strokeWidth={1} />
+    </div>
+    <CardContent className="flex h-full flex-col justify-center p-6 md:p-8 relative z-10 w-full md:w-3/4">
+      <CardTitle className="text-xl font-bold font-display text-slate-800">SOP Writing</CardTitle>
+      <CardDescription className="font-body text-base mt-2 leading-relaxed">
+        Stand out from the crowd. Our experts help craft compelling Statements of Purpose that get you noticed by top university admission boards.
+      </CardDescription>
+    </CardContent>
+  </Card>
+);
 
 const ServicesSection = () => {
-  const shouldReduceMotion = useReducedMotion();
   return (
-    <section id="services" className="py-24 bg-white relative overflow-hidden">
-      {/* Background accent */}
-      <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#EEF3FF] blur-3xl opacity-60 pointer-events-none -translate-y-1/2 translate-x-1/3" />
-
-      <div className="container mx-auto px-6 relative z-10">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
-          <motion.div
-            initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
-          >
-            <p className="text-xs font-semibold text-[#1A3C8F] uppercase tracking-widest mb-3">What We Do</p>
-            <h2 className="font-display text-3xl md:text-5xl font-extrabold text-[#0D1B3E] leading-tight tracking-tight">
-              Everything handled.<br />
-              <span className="text-gradient-accent">Nothing left to chance.</span>
-            </h2>
-          </motion.div>
-          <motion.p
-            initial={shouldReduceMotion ? {} : { opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-[#4A5568] text-base md:text-lg max-w-xs md:text-right font-light"
-          >
-            All 8 services are{" "}
-            <span className="font-semibold text-[#1A3C8F]">100% free</span>.
-            No hidden fees. Ever.
-          </motion.p>
+    <section id="services" className="bg-slate-50 py-24 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 -mr-40 w-96 h-96 bg-blue-100/40 rounded-full blur-3xl opacity-60 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 -ml-40 w-96 h-96 bg-purple-100/40 rounded-full blur-3xl opacity-60 pointer-events-none" />
+      
+      <div className="max-w-6xl mx-auto px-6 lg:px-8 relative z-10">
+        <div className="mb-14 text-center max-w-2xl mx-auto">
+          <div className="inline-flex border border-blue-200 bg-blue-50 text-blue-700 text-xs font-bold px-4 py-1.5 rounded-full mb-5 tracking-wide uppercase font-body">
+            Our Expertise
+          </div>
+          <h2 className="font-display text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-5 leading-tight">
+            How we can help you <span className="text-blue-600">succeed.</span>
+          </h2>
+          <p className="font-body text-lg text-slate-500 leading-relaxed">
+            From picking the perfect university to landing safely at your destination, 
+            we manage the entire complex process for you securely.
+          </p>
         </div>
 
-        {/* Service grid — Tripleten-style numbered items */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#D6E4FF] border border-[#D6E4FF] rounded-2xl overflow-hidden">
-          {services.map((service, i) => {
-            const Icon = iconMap[service.icon];
-            return (
-              <motion.div
-                key={service.title}
-                initial={shouldReduceMotion ? {} : { opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ delay: shouldReduceMotion ? 0 : i * 0.05, duration: 0.4 }}
-                className="service-item group relative bg-white p-8 hover:bg-[#EEF3FF] transition-colors duration-300 cursor-default"
-              >
-                <div className="flex items-start gap-5">
-                  {/* Large decorative number */}
-                  <span className="service-number text-5xl font-extrabold shrink-0 w-14 text-right leading-none mt-1">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-9 h-9 rounded-xl bg-[#EEF3FF] group-hover:bg-white flex items-center justify-center transition-colors duration-300 shrink-0">
-                        <Icon className="w-[18px] h-[18px] text-[#1A3C8F]" strokeWidth={2} />
-                      </div>
-                      <h3 className="font-display font-bold text-[#0D1B3E] text-base leading-tight">
-                        {service.title}
-                      </h3>
-                    </div>
-                    <p className="text-sm text-[#4A5568] leading-relaxed pl-[3.0rem]">
-                      {service.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
+        <BentoGridShowcase
+          integration={<IntegrationCard />}
+          trackers={<TrackersCard />}
+          statistic={<StatisticCard />}
+          focus={<FocusCard />}
+          productivity={<ProductivityCard />}
+          shortcuts={<ShortcutsCard />}
+        />
       </div>
     </section>
   );

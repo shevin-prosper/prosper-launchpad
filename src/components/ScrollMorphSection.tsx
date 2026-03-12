@@ -23,10 +23,10 @@ export default function ScrollMorphSection() {
     const startLeft = vw * 0.52;
     const startTop = vh * 0.09;
 
-    const endWidth = 300;
-    const endHeight = 420;
-    const endLeft = vw / 2 - 150;
-    const endTop = vh * 0.31;
+    const endWidth = 340;
+    const endHeight = 480;
+    const endLeft = vw / 2 - 170;
+    const endTop = vh * 0.28;
 
     const scaleRatio = endWidth / startWidth;
 
@@ -209,8 +209,8 @@ export default function ScrollMorphSection() {
             {/* ── LEFT CARD — graduation photo (add photo-graduation.jpg to /public when ready) ── */}
             <div
               ref={leftCardRef}
-              className="relative w-[300px] h-[420px] rounded-3xl overflow-hidden shadow-xl flex-shrink-0"
-              style={{ opacity: 0, marginTop: "48px" }}
+              className="relative w-[340px] h-[480px] rounded-3xl overflow-hidden shadow-xl flex-shrink-0"
+              style={{ opacity: 0, marginTop: "90px" }}
             >
               <img
                 src="/Grad2.png"
@@ -238,13 +238,13 @@ export default function ScrollMorphSection() {
             </div>
 
             {/* ── CENTER PLACEHOLDER (morph image lands here — keep invisible) ── */}
-            <div className="w-[300px] h-[420px] rounded-3xl flex-shrink-0" style={{ visibility: "hidden" }} />
+            <div className="w-[340px] h-[480px] rounded-3xl flex-shrink-0" style={{ visibility: "hidden" }} />
 
             {/* ── RIGHT CARD — seminar photo ── */}
             <div
               ref={rightCardRef}
-              className="relative w-[300px] h-[420px] rounded-3xl overflow-hidden shadow-xl flex-shrink-0"
-              style={{ opacity: 0, marginTop: "48px" }}
+              className="relative w-[340px] h-[480px] rounded-3xl overflow-hidden shadow-xl flex-shrink-0"
+              style={{ opacity: 0, marginTop: "110px" }}
             >
               <img
                 src="/Grad3.png"

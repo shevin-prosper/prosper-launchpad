@@ -8,30 +8,39 @@ import { Headphones, MessageSquare, HelpCircle, Sparkles, GraduationCap, FileTex
 export function Navbar() {
   const [active, setActive] = useState<string | null>(null);
   const { scrollY } = useScroll();
+  
+  // Stabilize the scroll value to prevent jitter/jumpiness
+  const scrollYSmooth = useSpring(scrollY, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
-  // Morph values: logo goes from big (no pill) → small (pill)
-  const logoHeight = useTransform(scrollY, [0, 120], [72, 40]);
-  const pillOpacity = useTransform(scrollY, [0, 100], [0, 1]);
-  const pillScale = useTransform(scrollY, [0, 100], [0.9, 1]);
+  // Morph values: logo goes from big → small
+  const logoHeight = useTransform(scrollYSmooth, [0, 150], [68, 38]);
+  const pillOpacity = useTransform(scrollYSmooth, [0, 100], [0, 1]);
+  const pillScale = useTransform(scrollYSmooth, [0, 100], [0.95, 1]);
 
   return (
-    <div className="fixed top-6 inset-x-0 w-full z-50 flex justify-center px-4">
-      <div className={cn("relative w-full max-w-7xl flex items-center justify-between")}>
-
+    <div className="fixed top-0 inset-x-0 w-full z-50 flex justify-center pointer-events-none pt-6">
+      <div 
+        className={cn("relative w-full max-w-7xl flex items-center justify-between px-4 pointer-events-auto")}
+        style={{ height: "80px" }} // Constant height ensures layout stability
+      >
         {/* Morphing Logo: starts big, shrinks into pill */}
-        <div className="flex-1 flex justify-start">
-          <Link to="/" className="relative flex items-center">
+        <div className="flex-1 flex justify-start items-center h-full">
+          <Link to="/" className="relative flex items-center group">
             {/* Pill background — fades in on scroll */}
             <motion.div
               style={{ opacity: pillOpacity, scale: pillScale }}
-              className="absolute inset-0 bg-white border border-slate-200 shadow-sm rounded-full"
+              className="absolute inset-x-0 inset-y-0.5 bg-white border border-slate-200 shadow-sm rounded-full"
             />
-            {/* Logo — shrinks from 72px → 40px on scroll */}
+            {/* Logo — shrinks smoothly on scroll */}
             <motion.img
               src="/logo.png"
               alt="Prosper Logo"
               style={{ height: logoHeight }}
-              className="relative z-10 w-auto object-contain px-4 py-2"
+              className="relative z-10 w-auto object-contain px-5 py-2 transition-filter duration-300"
             />
           </Link>
         </div>
